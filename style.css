@@ -4,7 +4,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("heart-bg.jpg");
+    background-image: url("heart-bg.png");
     font-family: "Pixelify Sans", sans-serif;
 }
 
@@ -80,7 +80,7 @@ p {
 
 .cat {
     width: 250px;
-    margin: 10px 0;
+    margin: 20px 0;
     transition: width 0.4 ease;
 }
 
