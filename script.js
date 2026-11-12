@@ -61,7 +61,7 @@ noBtn.addEventListener("click", () => {
 // YES is clicked
 
 yesBtn.addEventListener("click", () => {
-    title.textContent = "YYYYEEYYYY";
+    title.textContent = "YYEEYY";
 
     catImg.src = "cat_dance.gif";
 

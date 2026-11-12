@@ -1,6 +1,11 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     height: 100vh;
+    height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,30 +13,26 @@ body {
     font-family: "Pixelify Sans", sans-serif;
 }
 
-/* envelope screen*/
+/* ---------- envelope screen ---------- */
 #envelope-container {
     text-align: center;
     cursor: pointer;
 }
 
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
 #envelope {
-    width: 200px;
+    width: 250px;
+    max-width: 70vw;
     animation: pulse 1.5s infinite;
     cursor: pointer;
 }
 
+/* ---------- letter screen ---------- */
 #letter-container {
     display: none;
     position: fixed;
@@ -41,24 +42,22 @@ body {
 }
 
 .letter-window {
-    width: 90vw;
-    max-width: 800px;
-    aspect-ratio: 3/2;
-    padding: 20px 20px 0 20px;
+    /* never wider than 90vw, 800px, or what fits in 90% of the screen height */
+    width: min(90vw, 800px, calc(90vh * 1285 / 1164));
+    aspect-ratio: 1285 / 1164;    /* window.png's real width / height */
+    padding: 14% 5% 4% 5%;        /* % scales with the window, px does not */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image: url("window.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 12px;
     gap: 1px;
-    padding-top: 180px;
 
-    transform: scale(1.20);
+    background: url("window.png") center / 100% 100% no-repeat;
+    border-radius: 12px;
+    overflow: hidden;             /* content can never stretch the box */
+
+    transform: scale(1.2);
     opacity: 0;
     transition: transform 0.6s ease, opacity 0.6s ease;
 }
@@ -69,46 +68,49 @@ body {
 }
 
 h1 {
-    font-size: 30px;
+    font-size: clamp(14px, 6vw, 30px);
     margin: 0;
+    margin-top: 15%;
 }
 
 p {
-    font-size: 40px;
+    font-size: clamp(16px, 5vw, 40px);
+    margin: 0;
 }
-/* Cat */
 
+/* ---------- cat ---------- */
 .cat {
-    width: 250px;
-    margin: 20px 0;
-    transition: width 0.4 ease;
+    width: clamp(80px, 40%, 200px);
+    margin: 10px 0;
+    transition: width 0.4s ease;
 }
 
-.letter-window.final.cat {
-    width: 180px;
+.letter-window.final .cat {
+    width: clamp(70px, 35%, 180px);
 }
 
-/* buttons */
+/* ---------- buttons ---------- */
 .buttons {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: clamp(12px, 5vw, 30px);
     position: relative;
+    margin: 10px;
 }
 
-.no.wrapper {
+.no-wrapper {
     position: relative;
 }
 
 .btn {
-    width: 120px;
+    width: clamp(70px, 25vw, 125px);
     cursor: pointer;
     user-select: none;
 }
 
 .yes-btn,
 .no-btn {
-    width: 120px;
+    width: clamp(70px, 15vw, 120px);
     height: auto;
     display: inline-block;
 }
@@ -121,15 +123,16 @@ p {
 }
 
 .no-btn {
-    z-index: 1;
     position: relative;
-    transition: transform 0.15 ease;
+    z-index: 1;
+    transition: transform 0.15s ease;
     cursor: default;
 }
 
+/* ---------- final text ---------- */
 .final-text {
-    font-size: 22px;
-    line-height:  1.4;
+    font-size: clamp(14px, 4.5vw, 22px);
+    line-height: 1.4;
     text-align: center;
     display: inline-block;
     padding: 10px 20px;
